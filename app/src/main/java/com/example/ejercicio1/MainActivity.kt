@@ -16,9 +16,9 @@ class MainActivity : AppCompatActivity() {
 
         binding.recycler.adapter = Adapter(
             listOf(
-                Contacto("Pablo Rodríguez", "https://www.pngplay.com/wp-content/uploads/2/Cool-Android-Background-PNG-Image.png", "123456789", "pablo@gmail.com"),
-                Contacto("Pipo Masterclass", "https://www.pngplay.com/wp-content/uploads/2/Cool-Android-Background-PNG-Image.png", "987654321", "pipomaster@gmail.com"),
-                Contacto("Luis Star", "https://www.pngplay.com/wp-content/uploads/2/Cool-Android-Background-PNG-Image.png", "132465798", "luiskiko@gmail.com")
+                Contacto("Pablo Rodríguez", "https://static.wikia.nocookie.net/roblox/images/f/fe/Womanface.png/revision/latest/top-crop/width/360/height/450?cb=20211031043454", "123456789", "pablo@gmail.com"),
+                Contacto("Pipo Masterclass", "https://static.wikia.nocookie.net/roblox/images/f/fe/Womanface.png/revision/latest/top-crop/width/360/height/450?cb=20211031043454", "987654321", "pipomaster@gmail.com"),
+                Contacto("Luis Star", "https://static.wikia.nocookie.net/roblox/images/f/fe/Womanface.png/revision/latest/top-crop/width/360/height/450?cb=20211031043454", "132465798", "luiskiko@gmail.com")
             ),
 
             object : ContactoClickedListener {
