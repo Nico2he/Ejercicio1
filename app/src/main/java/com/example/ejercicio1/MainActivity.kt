@@ -1,7 +1,10 @@
 package com.example.ejercicio1
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -31,10 +34,28 @@ class MainActivity : AppCompatActivity() {
 
                     findViewById<ImageView>(R.id.fotoContacto).setImageResource(R.drawable.ic_launcher_foreground)
 
+                    findViewById<Button>(R.id.llamar).setOnClickListener { call(contacto.numero) }
+
+                    findViewById<Button>(R.id.email).setOnClickListener { mail(contacto.correo) }
+
                 }
 
             }
         )
+    }
+
+    fun call(telefono: String) {
+
+        val intent = Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", telefono, null))
+        startActivity(intent)
+
+    }
+
+    fun mail(correo: String) {
+
+        val intent = Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto", correo, null))
+        startActivity(intent)
+
     }
 
     override fun onDestroy() {
