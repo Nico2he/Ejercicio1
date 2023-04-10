@@ -4,18 +4,28 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.os.bundleOf
+import androidx.fragment.app.Fragment
 import com.example.ejercicio1.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity() {
+class MainFragment : Fragment(R.layout.activity_main) {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        val binding = ActivityMainBinding.bind(view)
+
+        val fragment = ContactoFragment()
+        parentFragmentManager
+            .beginTransaction()
+            .replace(R.id.fragment_container,fragment)
+            .addToBackStack(null)
+            .setReorderingAllowed(true)
+            .commit()
 
         binding.recycler.adapter = Adapter(
             listOf(
@@ -28,34 +38,12 @@ class MainActivity : AppCompatActivity() {
 
                 override fun onContactoClicked(contacto: Contacto) {
 
-                    setContentView(R.layout.contact)
-
-                    findViewById<TextView>(R.id.nombreContacto).text = contacto.nombre
-
-                    findViewById<ImageView>(R.id.fotoContacto).setImageResource(R.drawable.ic_launcher_foreground)
-
-                    findViewById<Button>(R.id.llamar).setOnClickListener { call(contacto.numero) }
-
-                    findViewById<Button>(R.id.email).setOnClickListener { mail(contacto.correo) }
+                    fragment.arguments = bundleOf(ContactoFragment.EXTRA_CONTACTO to contacto)
 
                 }
 
             }
         )
-    }
-
-    fun call(telefono: String) {
-
-        val intent = Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", telefono, null))
-        startActivity(intent)
-
-    }
-
-    fun mail(correo: String) {
-
-        val intent = Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto", correo, null))
-        startActivity(intent)
-
     }
 
     override fun onDestroy() {
