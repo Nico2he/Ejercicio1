@@ -23,16 +23,24 @@ class ContactoFragment : Fragment(R.layout.contact) {
             (requireActivity() as AppCompatActivity)
                 .supportActionBar?.title = contacto.nombre
 
-            findViewById<TextView>(R.id.nombreContacto).text = contacto.nombre
-            findViewById<ImageView>(R.id.fotoContacto).setImageResource(R.drawable.ic_launcher_foreground)
+            val nombreContacto = view.findViewById<TextView>(R.id.nombreContacto)
+            nombreContacto.text = contacto.nombre
 
-            findViewById<Button>(R.id.llamar).setOnClickListener { call(contacto.numero) }
-            findViewById<Button>(R.id.email).setOnClickListener { mail(contacto.correo) }
+            val imagen = view.findViewById<ImageView>(R.id.fotoContacto)
+            imagen.setImageResource(R.drawable.ic_launcher_foreground)
+
+            val botonLlamar = view.findViewById<Button>(R.id.llamar)
+            botonLlamar.setOnClickListener { call(contacto.numero) }
+
+            val botonEmail = view.findViewById<Button>(R.id.email)
+            botonEmail.setOnClickListener { mail(contacto.correo) }
+
         }
 
     }
 
     fun call(telefono: String) {
+
 
         val intent = Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", telefono, null))
         startActivity(intent)
