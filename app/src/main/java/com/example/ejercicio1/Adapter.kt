@@ -12,7 +12,9 @@ interface ContactoClickedListener {
 
 }
 
-class Adapter(private val contactos: List<Contacto>, private val contactoClickedListener: ContactoClickedListener) : RecyclerView.Adapter<Adapter.ViewHolder>() {
+class Adapter(private val listener: (Contacto) -> Unit) : RecyclerView.Adapter<Adapter.ViewHolder>() {
+
+    var contactos = emptyList<Contacto>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
@@ -30,7 +32,7 @@ class Adapter(private val contactos: List<Contacto>, private val contactoClicked
 
         val contacto = contactos[position]
         holder.bind(contacto)
-        holder.itemView.setOnClickListener { contactoClickedListener.onContactoClicked(contacto) }
+        holder.itemView.setOnClickListener { listener(contacto) }
 
     }
 

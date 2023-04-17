@@ -15,4 +15,12 @@
         app:spanCount="1"
         tools:listitem="@layout/view_contact_item" />
 
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+        android:id="@+id/progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        android:visibility="gone"
+        android:layout_gravity="center" />
+
 </LinearLayout>
