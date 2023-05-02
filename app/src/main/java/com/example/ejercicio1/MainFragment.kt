@@ -18,10 +18,10 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
 class MainFragment : Fragment(R.layout.activity_main) {
-    private val adapter = Adapter(){contacto -> navigateTo(contacto)}
 
     private val viewModel: MainViewModel by viewModels()
     private lateinit var binding: ActivityMainBinding
+    private val adapter = Adapter(){contacto -> viewModel.navigateTo(contacto)}
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,13 +33,20 @@ class MainFragment : Fragment(R.layout.activity_main) {
         (requireActivity() as AppCompatActivity)
             .supportActionBar?.title = getString(R.string.app_name)
 
-        viewModel.progressVisible.observe(viewLifecycleOwner) { visible ->
-            binding.progress.visibility = if (visible) VISIBLE else GONE
-        }
+        viewModel.state.observe(viewLifecycleOwner){state ->
+            binding.progress.visibility =  if (state.loading) VISIBLE else GONE
+            state.contactos?.let {
+                adapter.contactos = state.contactos
+                adapter.notifyDataSetChanged()
+            }
 
-        viewModel.contactos.observe(viewLifecycleOwner) {
-            adapter.contactos = it
-            adapter.notifyDataSetChanged()
+            state.navigateTo?.let {
+                findNavController().navigate(
+                    R.id.action_mainFragment_to_contactoFragment,
+                    bundleOf(ContactoFragment.EXTRA_CONTACTO to it)
+                )
+                viewModel.onNavigateDone()
+            }
 
         }
 
@@ -55,14 +62,6 @@ class MainFragment : Fragment(R.layout.activity_main) {
             }
 
         }
-
-    }
-
-    private fun navigateTo(contacto: Contacto) {
-        findNavController().navigate(
-            R.id.action_mainFragment_to_contactoFragment,
-            bundleOf(ContactoFragment.EXTRA_CONTACTO to contacto)
-        )
 
     }
 

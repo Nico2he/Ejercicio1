@@ -1,24 +1,34 @@
 package com.example.ejercicio1
 
-import android.view.View
 import androidx.lifecycle.*
 import com.example.ejercicio1.model.ContactosProvider
 import kotlinx.coroutines.*
 
 class MainViewModel(): ViewModel() {
-    private val _progressVisible = MutableLiveData(false)
-    val progressVisible: LiveData<Boolean> get() = _progressVisible
-
-    private val _contactos = MutableLiveData<List<Contacto>>(emptyList())
-    val contactos: LiveData<List<Contacto>> get() = _contactos
+    private val _state = MutableLiveData(UiState())
+    val state: LiveData<UiState> get() = _state
 
     init {
         viewModelScope.launch(Dispatchers.Main) {
-            _progressVisible.value = true
-            _contactos.value =  withContext(Dispatchers.IO){ContactosProvider.getContactos()}
-            _progressVisible.value = false
+            _state.value = _state.value?.copy(loading = true)
+            val contactos =  withContext(Dispatchers.IO){ContactosProvider.getContactos()}
+            _state.value = _state.value?.copy(loading = false, contactos = contactos)
         }
+
     }
 
+    fun navigateTo(contacto: Contacto) {
+        _state.value = _state.value?.copy(navigateTo = contacto)
+    }
+
+    fun onNavigateDone(){
+        _state.value = _state.value?.copy(navigateTo = null)
+    }
+
+    data class UiState(
+        val loading: Boolean = false,
+        val contactos: List<Contacto>? = null,
+        val navigateTo: Contacto? = null
+    )
 
 }

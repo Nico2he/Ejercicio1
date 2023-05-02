@@ -9,8 +9,12 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 
 class ContactoFragment : Fragment(R.layout.contact) {
+    private val viewModel: ContactoViewModel by viewModels {
+        ContactoViewModelFactory(arguments?.getParcelable<Contacto>(EXTRA_CONTACTO)!!)
+    }
     companion object {
         const val EXTRA_CONTACTO = "ContactoFragment:Contacto"
     }
@@ -23,8 +27,7 @@ class ContactoFragment : Fragment(R.layout.contact) {
         val botonLlamar = view.findViewById<Button>(R.id.llamar)
         val botonEmail = view.findViewById<Button>(R.id.email)
 
-        val contacto = arguments?.getParcelable<Contacto>(EXTRA_CONTACTO)
-        if (contacto != null) {
+        viewModel.contacto.observe(viewLifecycleOwner){ contacto ->
             (requireActivity() as AppCompatActivity)
                 .supportActionBar?.title = contacto.nombre
             nombreContacto.text = contacto.nombre
