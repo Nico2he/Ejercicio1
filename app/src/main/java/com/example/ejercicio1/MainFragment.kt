@@ -13,6 +13,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.ejercicio1.databinding.ActivityMainBinding
 import com.example.ejercicio1.model.ContactosProvider
+import com.example.ejercicio1.model.RemoteConnection
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
@@ -47,6 +49,12 @@ class MainFragment : Fragment(R.layout.activity_main) {
                 )
                 viewModel.onNavigateDone()
             }
+
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch{
+            val movies = RemoteConnection.service.popularMovies(getString(R.string.api_key))
+            Snackbar.make(binding.root, "Movies: ${movies.results.size}", Snackbar.LENGTH_SHORT).show()
 
         }
 
