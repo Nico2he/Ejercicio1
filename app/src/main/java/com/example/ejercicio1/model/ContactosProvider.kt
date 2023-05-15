@@ -1,9 +1,5 @@
 package com.example.ejercicio1.model
 
-import com.example.ejercicio1.Contacto
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
-
 object ContactosProvider {
     fun getContactos(): List<Contacto> {
         Thread.sleep(2000)

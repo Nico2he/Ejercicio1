@@ -7,17 +7,32 @@
 
     <fragment
         android:id="@+id/mainFragment"
-        android:name="com.example.ejercicio1.MainFragment"
+        android:name="com.example.ejercicio1.ui.main.MainFragment"
         android:label="fragment_main"
-        tools:layout="@layout/activity_main" >
+        tools:layout="@layout/fragment_main" >
         <action
             android:id="@+id/action_mainFragment_to_contactoFragment"
             app:destination="@id/contactoFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_createContactoFragment"
+            app:destination="@id/createContactoFragment" />
     </fragment>
     <fragment
         android:id="@+id/contactoFragment"
-        android:name="com.example.ejercicio1.ContactoFragment"
+        android:name="com.example.ejercicio1.ui.contacto.ContactoFragment"
         android:label="fragment_contacto"
-        tools:layout="@layout/contact" />
-
+        tools:layout="@layout/fragment_contacto" >
+    <action
+        android:id="@+id/action_contactoFragment_to_mainFragment"
+        app:destination="@id/mainFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/createContactoFragment"
+        android:name="com.example.ejercicio1.ui.create.CreateContactoFragment"
+        android:label="fragment_create_contacto"
+        tools:layout="@layout/fragment_create_contacto" >
+        <action
+            android:id="@+id/action_createContactoFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
 </navigation>

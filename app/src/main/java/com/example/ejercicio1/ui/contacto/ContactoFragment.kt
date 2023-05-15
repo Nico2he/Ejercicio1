@@ -1,5 +1,6 @@
-package com.example.ejercicio1
+package com.example.ejercicio1.ui.contacto
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
@@ -10,8 +11,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.example.ejercicio1.R
+import com.example.ejercicio1.model.Contacto
 
-class ContactoFragment : Fragment(R.layout.contact) {
+class ContactoFragment : Fragment(R.layout.fragment_contacto) {
     private val viewModel: ContactoViewModel by viewModels {
         ContactoViewModelFactory(arguments?.getParcelable<Contacto>(EXTRA_CONTACTO)!!)
     }
@@ -19,17 +22,17 @@ class ContactoFragment : Fragment(R.layout.contact) {
         const val EXTRA_CONTACTO = "ContactoFragment:Contacto"
     }
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+        super.onViewCreated(view, savedInstanceState)
 
         val nombreContacto = view.findViewById<TextView>(R.id.nombreContacto)
         val imagen = view.findViewById<ImageView>(R.id.fotoContacto)
         val botonLlamar = view.findViewById<Button>(R.id.llamar)
         val botonEmail = view.findViewById<Button>(R.id.email)
 
-        viewModel.contacto.observe(viewLifecycleOwner){ contacto ->
-            (requireActivity() as AppCompatActivity)
-                .supportActionBar?.title = contacto.nombre
+        viewModel.contacto.observe(viewLifecycleOwner){ contacto: Contacto ->
+            (requireActivity() as AppCompatActivity).supportActionBar?.title = contacto.nombre
             nombreContacto.text = contacto.nombre
             imagen.setImageResource(R.drawable.ic_launcher_foreground)
             botonLlamar.setOnClickListener { call(contacto.numero) }
