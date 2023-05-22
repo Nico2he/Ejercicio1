@@ -9,7 +9,7 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/nombreContacto"
+        android:id="@+id/tituloComic"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="30dp"
@@ -19,27 +19,9 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
     <ImageView
-        android:id="@+id/fotoContacto"
+        android:id="@+id/portadaComic"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="50dp"
         tools:srcCompat="@tools:sample/avatars" />
-
-    <Button
-        android:id="@+id/llamar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="155dp"
-        android:layout_marginBottom="50dp"
-        android:backgroundTint="#838585"
-        android:hapticFeedbackEnabled="false"
-        android:text="LLAMAR" />
-
-    <Button
-        android:id="@+id/email"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="130dp"
-        android:backgroundTint="#8A8A8A"
-        android:text="ENVIAR E-MAIL" />
 </LinearLayout>

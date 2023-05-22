@@ -7,32 +7,32 @@
 
     <fragment
         android:id="@+id/mainFragment"
-        android:name="com.example.ejercicio1.ui.main.MainFragment"
+        android:name="com.example.ejercicio1.ui.comic.ComicFragment"
         android:label="fragment_main"
-        tools:layout="@layout/fragment_main" >
+        tools:layout="@layout/fragment_comic" >
         <action
-            android:id="@+id/action_mainFragment_to_contactoFragment"
+            android:id="@+id/action_comicFragment_to_comicDetailFragment"
             app:destination="@id/contactoFragment" />
         <action
-            android:id="@+id/action_mainFragment_to_createContactoFragment"
+            android:id="@+id/action_comicFragment_to_createComicFragment"
             app:destination="@id/createContactoFragment" />
     </fragment>
     <fragment
         android:id="@+id/contactoFragment"
-        android:name="com.example.ejercicio1.ui.contacto.ContactoFragment"
+        android:name="com.example.ejercicio1.ui.comicDetail.ComicDetailFragment"
         android:label="fragment_contacto"
-        tools:layout="@layout/fragment_contacto" >
+        tools:layout="@layout/fragment_comic_detail" >
     <action
         android:id="@+id/action_contactoFragment_to_mainFragment"
         app:destination="@id/mainFragment" />
     </fragment>
     <fragment
         android:id="@+id/createContactoFragment"
-        android:name="com.example.ejercicio1.ui.create.CreateContactoFragment"
+        android:name="com.example.ejercicio1.ui.create.CreateComicFragment"
         android:label="fragment_create_contacto"
-        tools:layout="@layout/fragment_create_contacto" >
+        tools:layout="@layout/fragment_create_comic" >
         <action
-            android:id="@+id/action_createContactoFragment_to_mainFragment"
+            android:id="@+id/action_createComicFragment_to_comicFragment"
             app:destination="@id/mainFragment" />
     </fragment>
 </navigation>

@@ -2,16 +2,16 @@ package com.example.ejercicio1.ui.create
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.ejercicio1.model.Contacto
+import com.example.ejercicio1.model.Comic
 import com.example.ejercicio1.model.DbFirestore
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class CreateContactoViewModel: ViewModel() {
+class CreateComicViewModel: ViewModel() {
 
-    fun createContacto(contacto: Contacto){
+    fun createComic(comic: Comic){
         viewModelScope.launch(Dispatchers.IO) {
-            DbFirestore.createContacto(contacto)
+            DbFirestore.createComic(comic)
         }
 
     }

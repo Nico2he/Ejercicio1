@@ -1,11 +1,11 @@
-package com.example.ejercicio1.ui.main
+package com.example.ejercicio1.ui.comic
 
 import androidx.lifecycle.*
-import com.example.ejercicio1.model.Contacto
+import com.example.ejercicio1.model.Comic
 import com.example.ejercicio1.model.DbFirestore
 import kotlinx.coroutines.*
 
-class MainViewModel(): ViewModel() {
+class ComicViewModel(): ViewModel() {
     private val _state = MutableLiveData(UiState())
     val state: LiveData<UiState> get() = _state
 
@@ -13,16 +13,16 @@ class MainViewModel(): ViewModel() {
         viewModelScope.launch(Dispatchers.Main) {
             _state.value = _state.value?.copy(loading = true)
             DbFirestore.getAllObservable().observeForever {
-                _state.value = _state.value?.copy(loading = false, contactos = it)
+                _state.value = _state.value?.copy(loading = false, comics = it)
             }
         }
 
     }
 
-    private suspend fun requestContactos(): List<Contacto>  = DbFirestore.getAll()
+    private suspend fun requestComics(): List<Comic>  = DbFirestore.getAll()
 
-    fun navigateTo(contacto: Contacto) {
-        _state.value = _state.value?.copy(navigateTo = contacto)
+    fun navigateTo(comic: Comic) {
+        _state.value = _state.value?.copy(navigateTo = comic)
     }
 
     fun onNavigateDone(){
@@ -39,8 +39,8 @@ class MainViewModel(): ViewModel() {
 
     data class UiState(
         val loading: Boolean = false,
-        val contactos: List<Contacto>? = null,
-        val navigateTo: Contacto? = null,
+        val comics: List<Comic>? = null,
+        val navigateTo: Comic? = null,
         val navigateToCreate: Boolean = false
     )
 

@@ -9,86 +9,86 @@ import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 
 object DbFirestore {
-    const val COLLECTION_CONTACTOS = "contactos"
-    suspend fun getAll(): List<Contacto> {
-        val snapshot = FirebaseFirestore.getInstance().collection(COLLECTION_CONTACTOS)
+    const val COLLECTION_COMICS = "comics"
+    suspend fun getAll(): List<Comic> {
+        val snapshot = FirebaseFirestore.getInstance().collection(COLLECTION_COMICS)
             .get()
             .await()
-        val contactos = mutableListOf<Contacto>()
+        val comics = mutableListOf<Comic>()
         for (documentSnapshot in snapshot){
-            val contacto = documentSnapshot.toObject(Contacto::class.java)
-            contactos.add(contacto)
+            val comic = documentSnapshot.toObject(Comic::class.java)
+            comics.add(comic)
         }
-        return contactos
+        return comics
     }
 
-    suspend fun createContacto(contacto: Contacto){
-        FirebaseFirestore.getInstance().collection(COLLECTION_CONTACTOS)
-            .add(contacto)
+    suspend fun createComic(comic: Comic){
+        FirebaseFirestore.getInstance().collection(COLLECTION_COMICS)
+            .add(comic)
             .addOnCompleteListener {
                 if (it.isSuccessful){
-                    Log.d(COLLECTION_CONTACTOS, it.result.id)
+                    Log.d(COLLECTION_COMICS, it.result.id)
                 }
             }
             .addOnFailureListener {
-                Log.e(COLLECTION_CONTACTOS, it.toString())
+                Log.e(COLLECTION_COMICS, it.toString())
             }
 
     }
 
-    fun borraContacto(contacto: Contacto) {
-        FirebaseFirestore.getInstance().collection(COLLECTION_CONTACTOS)
-            .whereEqualTo("nombre", contacto.nombre)
+    fun borraComic(comic: Comic) {
+        FirebaseFirestore.getInstance().collection(COLLECTION_COMICS)
+            .whereEqualTo("titulo", comic.titulo)
             .get()
             .addOnCompleteListener {
                 if (it.isSuccessful){
                     val id = it.result.first().id
-                    FirebaseFirestore.getInstance().collection(COLLECTION_CONTACTOS)
+                    FirebaseFirestore.getInstance().collection(COLLECTION_COMICS)
                         .document(id)
                         .delete()
                         .addOnCompleteListener {
                             if (it.isSuccessful){
-                                Log.d(COLLECTION_CONTACTOS, id)
+                                Log.d(COLLECTION_COMICS, id)
                             }
                         }
                         .addOnFailureListener {
-                            Log.e(COLLECTION_CONTACTOS, it.toString())
+                            Log.e(COLLECTION_COMICS, it.toString())
                         }
                 }
             }
     }
 
-    fun modificaNombre(contacto: Contacto?, nombre: String) {
-        FirebaseFirestore.getInstance().collection(COLLECTION_CONTACTOS)
-            .whereEqualTo("nombre", nombre)
+    fun modificaTitulo(comic: Comic?, titulo: String) {
+        FirebaseFirestore.getInstance().collection(COLLECTION_COMICS)
+            .whereEqualTo("titulo", titulo)
             .get()
             .addOnCompleteListener {
                 if (it.isSuccessful){
                     val id = it.result.first().id
-                    FirebaseFirestore.getInstance().collection(COLLECTION_CONTACTOS)
+                    FirebaseFirestore.getInstance().collection(COLLECTION_COMICS)
                         .document(id)
-                        .update("nombre", contacto?.nombre)
+                        .update("titulo", comic?.titulo)
                         .addOnCompleteListener {
                             if (it.isSuccessful){
-                                Log.d(COLLECTION_CONTACTOS, id)
+                                Log.d(COLLECTION_COMICS, id)
                             }
                         }
                         .addOnFailureListener {
-                            Log.e(COLLECTION_CONTACTOS, it.toString())
+                            Log.e(COLLECTION_COMICS, it.toString())
                         }
                 }
             }
     }
 
-    suspend fun getAllObservable(): LiveData<MutableList<Contacto>> {
+    suspend fun getAllObservable(): LiveData<MutableList<Comic>> {
 
         return withContext(Dispatchers.IO) {
-            val mutableData = MutableLiveData<MutableList<Contacto>>()
-            FirebaseFirestore.getInstance().collection(COLLECTION_CONTACTOS)
+            val mutableData = MutableLiveData<MutableList<Comic>>()
+            FirebaseFirestore.getInstance().collection(COLLECTION_COMICS)
                 .addSnapshotListener { snapshot, e ->
-                    var listas = mutableListOf<Contacto>()
+                    var listas = mutableListOf<Comic>()
                     if (snapshot != null) {
-                        listas = snapshot.toObjects(Contacto::class.java)
+                        listas = snapshot.toObjects(Comic::class.java)
                     }
                     mutableData.value = listas
                 }
