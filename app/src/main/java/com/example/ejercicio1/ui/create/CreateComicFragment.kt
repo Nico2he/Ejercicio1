@@ -16,7 +16,15 @@ class CreateComicFragment : Fragment(R.layout.fragment_create_comic) {
         val binding = FragmentCreateComicBinding.bind(view)
 
         binding.button.setOnClickListener {
-            val comic = Comic(binding.editTextTextComicTitle.text.toString())
+            val comic = Comic(
+                binding.editTextTextComicTitle.text.toString(),
+                binding.editTextTextComicFrontpage.text.toString(),
+                binding.editTextTextComicPremiereDate.text.toString(),
+                binding.editTextTextComicPremiereYear.text.toString(),
+                binding.editTextTextComicChapters.text.toString(),
+                binding.editTextTextComicSynopsis.text.toString(),
+                binding.editTextTextComicRating.text.toString(),
+            )
             viewModel.createComic(comic)
             findNavController().navigate(
                 R.id.action_createComicFragment_to_comicFragment)

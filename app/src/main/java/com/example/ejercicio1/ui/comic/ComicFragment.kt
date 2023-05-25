@@ -53,7 +53,7 @@ class ComicFragment : Fragment(R.layout.fragment_comic) {
 
         }
 
-        binding.fab.setOnClickListener {
+        binding.addButton.setOnClickListener {
             viewModel.navigateToCreate()
         }
 

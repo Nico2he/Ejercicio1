@@ -26,31 +26,23 @@ class ComicDetailFragment : Fragment(R.layout.fragment_comic_detail) {
         super.onViewCreated(view, savedInstanceState)
 
         val tituloComic = view.findViewById<TextView>(R.id.tituloComic)
+        val fechaEstrenoComic = view.findViewById<TextView>(R.id.fechaEstrenoComic)
+        val capitulosComic = view.findViewById<TextView>(R.id.capitulosComic)
+        val sinopsisComic = view.findViewById<TextView>(R.id.sinopsisComic)
+        val valoracionComic = view.findViewById<TextView>(R.id.valoracionComic)
         val portada = view.findViewById<ImageView>(R.id.portadaComic)
 
         viewModel.comic.observe(viewLifecycleOwner){ comic: Comic ->
             (requireActivity() as AppCompatActivity).supportActionBar?.title = comic.titulo
             tituloComic.text = comic.titulo
+            fechaEstrenoComic.text = comic.fechaEstreno
+            capitulosComic.text = comic.capitulos
+            sinopsisComic.text = comic.sinopsis
+            valoracionComic.text = comic.valoracion
             portada.setImageResource(R.drawable.ic_launcher_foreground)
-            //botonLlamar.setOnClickListener { call(comic.numero) }
 
         }
 
     }
 
-    /*
-    fun call(telefono: String) {
-
-        val intent = Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", telefono, null))
-        startActivity(intent)
-
-    }
-
-    fun mail(correo: String) {
-
-        val intent = Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto", correo, null))
-        startActivity(intent)
-
-    }
-    */
 }
