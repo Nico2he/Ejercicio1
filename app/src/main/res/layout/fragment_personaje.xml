@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.comic.ComicFragment">
+    tools:context=".ui.personaje.PersonajeFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler"
@@ -13,7 +13,7 @@
         android:layout_height="match_parent"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:spanCount="1"
-        tools:listitem="@layout/view_comic_item" />
+        tools:listitem="@layout/view_personaje_item" />
 
     <com.google.android.material.progressindicator.CircularProgressIndicator
         android:id="@+id/progress"
@@ -29,24 +29,21 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/personajesButton"
+            android:id="@+id/comicsButton"
             android:layout_width="295dp"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|start"
-            android:layout_marginBottom="9dp"
             android:layout_marginLeft="9dp"
+            android:layout_marginBottom="9dp"
             android:layout_weight="1"
-            android:text="Ver Personajes" />
+            android:text="Ver Comics" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/addButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
+            android:layout_margin="16dp"
             android:clickable="true"
             android:src="@android:drawable/ic_menu_add"
             android:visibility="visible"

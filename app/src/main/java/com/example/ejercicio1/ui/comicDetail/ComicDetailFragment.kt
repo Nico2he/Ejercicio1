@@ -1,8 +1,6 @@
 package com.example.ejercicio1.ui.comicDetail
 
 import android.annotation.SuppressLint
-import android.content.Intent
-import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -25,21 +23,21 @@ class ComicDetailFragment : Fragment(R.layout.fragment_comic_detail) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val portadaComic = view.findViewById<ImageView>(R.id.portadaComic)
         val tituloComic = view.findViewById<TextView>(R.id.tituloComic)
         val fechaEstrenoComic = view.findViewById<TextView>(R.id.fechaEstrenoComic)
         val capitulosComic = view.findViewById<TextView>(R.id.capitulosComic)
         val sinopsisComic = view.findViewById<TextView>(R.id.sinopsisComic)
         val valoracionComic = view.findViewById<TextView>(R.id.valoracionComic)
-        val portada = view.findViewById<ImageView>(R.id.portadaComic)
 
         viewModel.comic.observe(viewLifecycleOwner){ comic: Comic ->
             (requireActivity() as AppCompatActivity).supportActionBar?.title = comic.titulo
+            portadaComic.setImageResource(R.drawable.ic_launcher_foreground)
             tituloComic.text = comic.titulo
             fechaEstrenoComic.text = comic.fechaEstreno
             capitulosComic.text = comic.capitulos
             sinopsisComic.text = comic.sinopsis
             valoracionComic.text = comic.valoracion
-            portada.setImageResource(R.drawable.ic_launcher_foreground)
 
         }
 

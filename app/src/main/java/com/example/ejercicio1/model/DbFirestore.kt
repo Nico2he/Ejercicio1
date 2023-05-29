@@ -10,6 +10,7 @@ import kotlinx.coroutines.withContext
 
 object DbFirestore {
     const val COLLECTION_COMICS = "comics"
+    const val COLLECTION_PERSONAJES = "personajes"
     suspend fun getAll(): List<Comic> {
         val snapshot = FirebaseFirestore.getInstance().collection(COLLECTION_COMICS)
             .get()
@@ -22,6 +23,18 @@ object DbFirestore {
         return comics
     }
 
+    suspend fun getAllPersonajes(): List<Personaje> {
+        val snapshot = FirebaseFirestore.getInstance().collection(COLLECTION_PERSONAJES)
+            .get()
+            .await()
+        val personajes = mutableListOf<Personaje>()
+        for (documentSnapshot in snapshot){
+            val personaje = documentSnapshot.toObject(Personaje::class.java)
+            personajes.add(personaje)
+        }
+        return personajes
+    }
+
     suspend fun createComic(comic: Comic){
         FirebaseFirestore.getInstance().collection(COLLECTION_COMICS)
             .add(comic)
@@ -32,6 +45,20 @@ object DbFirestore {
             }
             .addOnFailureListener {
                 Log.e(COLLECTION_COMICS, it.toString())
+            }
+
+    }
+
+    suspend fun createPersonaje(personaje: Personaje){
+        FirebaseFirestore.getInstance().collection(COLLECTION_PERSONAJES)
+            .add(personaje)
+            .addOnCompleteListener {
+                if (it.isSuccessful){
+                    Log.d(COLLECTION_PERSONAJES, it.result.id)
+                }
+            }
+            .addOnFailureListener {
+                Log.e(COLLECTION_PERSONAJES, it.toString())
             }
 
     }
@@ -96,5 +123,23 @@ object DbFirestore {
             return@withContext mutableData
         }
     }
+
+    suspend fun getAllObservablePersonajes(): LiveData<MutableList<Personaje>> {
+
+        return withContext(Dispatchers.IO) {
+            val mutableData = MutableLiveData<MutableList<Personaje>>()
+            FirebaseFirestore.getInstance().collection(COLLECTION_PERSONAJES)
+                .addSnapshotListener { snapshot, e ->
+                    var listas = mutableListOf<Personaje>()
+                    if (snapshot != null) {
+                        listas = snapshot.toObjects(Personaje::class.java)
+                    }
+                    mutableData.value = listas
+                }
+
+            return@withContext mutableData
+        }
+    }
+
 
 }

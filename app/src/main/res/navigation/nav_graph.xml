@@ -3,36 +3,72 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/mainFragment">
+    app:startDestination="@id/comicFragment">
 
     <fragment
-        android:id="@+id/mainFragment"
+        android:id="@+id/comicFragment"
         android:name="com.example.ejercicio1.ui.comic.ComicFragment"
-        android:label="fragment_main"
+        android:label="fragment_comic"
         tools:layout="@layout/fragment_comic" >
         <action
             android:id="@+id/action_comicFragment_to_comicDetailFragment"
-            app:destination="@id/contactoFragment" />
+            app:destination="@id/comicDetailFragment" />
         <action
             android:id="@+id/action_comicFragment_to_createComicFragment"
-            app:destination="@id/createContactoFragment" />
+            app:destination="@id/createComicFragment" />
+        <action
+            android:id="@+id/action_comicFragment_to_personajeFragment"
+            app:destination="@id/personajeFragment" />
     </fragment>
     <fragment
-        android:id="@+id/contactoFragment"
+        android:id="@+id/comicDetailFragment"
         android:name="com.example.ejercicio1.ui.comicDetail.ComicDetailFragment"
-        android:label="fragment_contacto"
+        android:label="fragment_comic_detail"
         tools:layout="@layout/fragment_comic_detail" >
     <action
-        android:id="@+id/action_contactoFragment_to_mainFragment"
-        app:destination="@id/mainFragment" />
+        android:id="@+id/action_comicDetailFragment_to_comicFragment"
+        app:destination="@id/comicFragment" />
     </fragment>
     <fragment
-        android:id="@+id/createContactoFragment"
+        android:id="@+id/createComicFragment"
         android:name="com.example.ejercicio1.ui.create.CreateComicFragment"
-        android:label="fragment_create_contacto"
+        android:label="fragment_create_comic"
         tools:layout="@layout/fragment_create_comic" >
         <action
             android:id="@+id/action_createComicFragment_to_comicFragment"
-            app:destination="@id/mainFragment" />
+            app:destination="@id/comicFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/personajeFragment"
+        android:name="com.example.ejercicio1.ui.personaje.PersonajeFragment"
+        android:label="fragment_personaje"
+        tools:layout="@layout/fragment_personaje" >
+        <action
+            android:id="@+id/action_personajeFragment_to_personajeDetailFragment"
+            app:destination="@id/personajeDetailFragment" />
+        <action
+            android:id="@+id/action_personajeFragment_to_createPersonajeFragment"
+            app:destination="@id/createPersonajeFragment" />
+        <action
+            android:id="@+id/action_personajeFragment_to_comicFragment"
+            app:destination="@id/comicFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/personajeDetailFragment"
+        android:name="com.example.ejercicio1.ui.personajeDetail.PersonajeDetailFragment"
+        android:label="fragment_personaje_detail"
+        tools:layout="@layout/fragment_personaje_detail" >
+        <action
+            android:id="@+id/action_comicDetailFragment_to_comicFragment"
+            app:destination="@id/comicFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/createPersonajeFragment"
+        android:name="com.example.ejercicio1.ui.create.CreatePersonajeFragment"
+        android:label="fragment_create_personaje"
+        tools:layout="@layout/fragment_create_personaje" >
+        <action
+            android:id="@+id/action_createPersonajeFragment_to_personajeFragment"
+            app:destination="@id/personajeFragment" />
     </fragment>
 </navigation>

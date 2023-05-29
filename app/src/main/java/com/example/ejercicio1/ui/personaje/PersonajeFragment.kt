@@ -1,4 +1,4 @@
-package com.example.ejercicio1.ui.comic
+package com.example.ejercicio1.ui.personaje
 
 import android.os.Bundle
 import android.util.Log
@@ -11,33 +11,33 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.ejercicio1.R
-import com.example.ejercicio1.databinding.FragmentComicBinding
-import com.example.ejercicio1.ui.comicDetail.ComicDetailFragment
+import com.example.ejercicio1.databinding.FragmentPersonajeBinding
+import com.example.ejercicio1.ui.personajeDetail.PersonajeDetailFragment
 
-class ComicFragment : Fragment(R.layout.fragment_comic) {
+class PersonajeFragment : Fragment(R.layout.fragment_personaje) {
 
-    private val viewModel: ComicViewModel by viewModels()
-    private lateinit var binding: FragmentComicBinding
-    private val adapter = Adapter(){ comic -> viewModel.navigateTo(comic)}
+    private val viewModel: PersonajeViewModel by viewModels()
+    private lateinit var binding: FragmentPersonajeBinding
+    private val adapter = AdapterPersonaje(){ personaje -> viewModel.navigateTo(personaje)}
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding = FragmentComicBinding.bind(view).apply {
+        binding = FragmentPersonajeBinding.bind(view).apply {
             recycler.adapter = adapter
         }
         (requireActivity() as AppCompatActivity).supportActionBar?.title = getString(R.string.app_name)
 
         viewModel.state.observe(viewLifecycleOwner){state ->
             binding.progress.visibility =  if (state.loading) VISIBLE else GONE
-            state.comics?.let {
-                adapter.comics = state.comics
+            state.personajes?.let {
+                adapter.personajes = state.personajes
                 adapter.notifyDataSetChanged()
             }
 
             state.navigateTo?.let {
                 findNavController().navigate(
-                    R.id.action_comicFragment_to_comicDetailFragment,
-                    bundleOf(ComicDetailFragment.EXTRA_COMIC to it)
+                    R.id.action_personajeFragment_to_personajeDetailFragment,
+                    bundleOf(PersonajeDetailFragment.EXTRA_PERSONAJE to it)
                 )
                 viewModel.onNavigateDone()
             }
@@ -45,7 +45,7 @@ class ComicFragment : Fragment(R.layout.fragment_comic) {
             state.navigateToCreate?.let{
                 if (it) {
                     findNavController().navigate(
-                        R.id.action_comicFragment_to_createComicFragment,
+                        R.id.action_personajeFragment_to_createPersonajeFragment,
                     )
                     viewModel.navigateToCreateDone()
                 }
@@ -57,9 +57,9 @@ class ComicFragment : Fragment(R.layout.fragment_comic) {
             viewModel.navigateToCreate()
         }
 
-        binding.personajesButton.setOnClickListener {
+        binding.comicsButton.setOnClickListener {
             findNavController().navigate(
-                R.id.action_comicFragment_to_personajeFragment)
+                R.id.action_personajeFragment_to_comicFragment)
         }
 
     }
@@ -67,6 +67,6 @@ class ComicFragment : Fragment(R.layout.fragment_comic) {
     override fun onDestroy() {
         super.onDestroy()
 
-        Log.d("ComicFragment", "onDestroy")
+        Log.d("PersonajeFragment", "onDestroy")
     }
 }
