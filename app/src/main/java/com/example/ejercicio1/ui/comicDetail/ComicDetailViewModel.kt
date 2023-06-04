@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.ejercicio1.model.Comic
 
+
 class ComicDetailViewModel(comic: Comic): ViewModel() {
     private val _comic = MutableLiveData(comic)
     val comic: LiveData<Comic> get() = _comic

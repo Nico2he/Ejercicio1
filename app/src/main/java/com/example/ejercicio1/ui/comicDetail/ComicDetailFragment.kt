@@ -8,6 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.bumptech.glide.Glide
 import com.example.ejercicio1.R
 import com.example.ejercicio1.model.Comic
 
@@ -32,12 +33,12 @@ class ComicDetailFragment : Fragment(R.layout.fragment_comic_detail) {
 
         viewModel.comic.observe(viewLifecycleOwner){ comic: Comic ->
             (requireActivity() as AppCompatActivity).supportActionBar?.title = comic.titulo
-            portadaComic.setImageResource(R.drawable.ic_launcher_foreground)
+            Glide.with(this).load(comic.portada).into(portadaComic)
             tituloComic.text = comic.titulo
             fechaEstrenoComic.text = comic.fechaEstreno
             capitulosComic.text = comic.capitulos
             sinopsisComic.text = comic.sinopsis
-            valoracionComic.text = comic.valoracion
+            valoracionComic.text = comic.valoracion + "/5 " + getString(R.string.Star)
 
         }
 

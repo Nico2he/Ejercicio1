@@ -8,6 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.bumptech.glide.Glide
 import com.example.ejercicio1.R
 import com.example.ejercicio1.model.Personaje
 
@@ -31,7 +32,7 @@ class PersonajeDetailFragment : Fragment(R.layout.fragment_personaje_detail) {
 
         viewModel.personaje.observe(viewLifecycleOwner){ personaje: Personaje ->
             (requireActivity() as AppCompatActivity).supportActionBar?.title = personaje.nombre
-            fotoPersonaje.setImageResource(R.drawable.ic_launcher_foreground)
+            Glide.with(this).load(personaje.foto).into(fotoPersonaje)
             nombrePersonaje.text = personaje.nombre
             superpoderPersonaje.text = personaje.superpoder
             edadPersonaje.text = personaje.edad
