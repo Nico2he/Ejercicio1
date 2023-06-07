@@ -6,7 +6,8 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.create.CreateComicFragment">
+    tools:context=".ui.create.CreateComicFragment"
+    android:background="#8C3C3C" >
 
     <EditText
         android:id="@+id/editTextTextComicTitle"
@@ -14,9 +15,12 @@
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:ems="10"
-        android:text="Título"
+        android:hint="Título"
+        android:textColorHint="@color/white"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#FFFFFF" />
 
     <EditText
         android:id="@+id/editTextTextComicFrontpage"
@@ -24,9 +28,12 @@
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:ems="10"
-        android:text="Enlace Imagen Portada"
+        android:hint="Enlace Imagen Portada"
+        android:textColorHint="@color/white"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#FFFFFF" />
 
     <EditText
         android:id="@+id/editTextTextComicPremiereDate"
@@ -34,9 +41,12 @@
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:ems="10"
-        android:text="Fecha Estreno (DD/MM/YYYY)"
+        android:hint="Fecha Estreno (DD/MM/YYYY)"
+        android:textColorHint="@color/white"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#FFFFFF" />
 
     <EditText
         android:id="@+id/editTextTextComicPremiereYear"
@@ -44,9 +54,12 @@
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:ems="10"
-        android:text="Año Estreno"
+        android:hint="Año Estreno"
+        android:textColorHint="@color/white"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#FFFFFF" />
 
     <EditText
         android:id="@+id/editTextTextComicChapters"
@@ -54,9 +67,12 @@
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:ems="10"
-        android:text="Nº Capítulos"
+        android:hint="Nº Capítulos"
+        android:textColorHint="@color/white"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#FFFFFF" />
 
     <EditText
         android:id="@+id/editTextTextComicSynopsis"
@@ -64,9 +80,12 @@
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:ems="10"
-        android:text="Sinopsis"
+        android:hint="Sinopsis"
+        android:textColorHint="@color/white"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#FFFFFF" />
 
     <EditText
         android:id="@+id/editTextTextComicRating"
@@ -74,14 +93,18 @@
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:ems="10"
-        android:text="Valoración (0 - 5)"
+        android:hint="Valoración (0 - 5)"
+        android:textColorHint="@color/white"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#FFFFFF" />
 
     <Button
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:text="Aceptar" />
+        android:backgroundTint="@color/teal_700"
+        android:text="Añadir Cómic" />
 </LinearLayout>
