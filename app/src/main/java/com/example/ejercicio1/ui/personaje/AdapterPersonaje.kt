@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.ejercicio1.databinding.ViewPersonajeItemBinding
+import com.example.ejercicio1.model.DbFirestore
 import com.example.ejercicio1.model.Personaje
 
 class AdapterPersonaje(val listener: (Personaje) -> Unit):
@@ -40,6 +41,9 @@ class AdapterPersonaje(val listener: (Personaje) -> Unit):
         fun bind(personaje: Personaje) {
 
             binding.nombrePersonaje.text = personaje.nombre
+            binding.borrarPersonajeButton.setOnClickListener{
+                DbFirestore.borraPersonaje(personaje)
+            }
 
             Glide
                 .with(binding.root.context)

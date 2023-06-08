@@ -2,10 +2,16 @@ package com.example.ejercicio1.ui.comic
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.lifecycle.viewModelScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.ejercicio1.R
 import com.example.ejercicio1.databinding.ViewComicItemBinding
 import com.example.ejercicio1.model.Comic
+import com.example.ejercicio1.model.DbFirestore
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class Adapter(val listener: (Comic) -> Unit):
     RecyclerView.Adapter<Adapter.ViewHolder>() {
@@ -41,6 +47,9 @@ class Adapter(val listener: (Comic) -> Unit):
 
             binding.titulo.text = comic.titulo
             binding.anyoEstreno.text = comic.anyoEstreno
+            binding.borrarComicButton.setOnClickListener{
+                DbFirestore.borraComic(comic)
+            }
 
             Glide
                 .with(binding.root.context)

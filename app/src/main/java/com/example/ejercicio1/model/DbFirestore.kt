@@ -85,6 +85,28 @@ object DbFirestore {
             }
     }
 
+    fun borraPersonaje(personaje: Personaje) {
+        FirebaseFirestore.getInstance().collection(COLLECTION_PERSONAJES)
+            .whereEqualTo("nombre", personaje.nombre)
+            .get()
+            .addOnCompleteListener {
+                if (it.isSuccessful){
+                    val id = it.result.first().id
+                    FirebaseFirestore.getInstance().collection(COLLECTION_PERSONAJES)
+                        .document(id)
+                        .delete()
+                        .addOnCompleteListener {
+                            if (it.isSuccessful){
+                                Log.d(COLLECTION_PERSONAJES, id)
+                            }
+                        }
+                        .addOnFailureListener {
+                            Log.e(COLLECTION_PERSONAJES, it.toString())
+                        }
+                }
+            }
+    }
+
     fun modificaTitulo(comic: Comic?, titulo: String) {
         FirebaseFirestore.getInstance().collection(COLLECTION_COMICS)
             .whereEqualTo("titulo", titulo)

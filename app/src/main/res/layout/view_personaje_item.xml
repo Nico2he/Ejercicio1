@@ -45,11 +45,23 @@
         <TextView
             android:id="@+id/nombrePersonaje"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="105dp"
             android:gravity="center_horizontal|center_vertical"
             android:text="TextView"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textColor="#FFFFFF" />
+
+        <Button
+            android:id="@+id/borrarPersonajeButton"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="bottom|end"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="16dp"
+            android:clickable="true"
+            android:background="@android:drawable/ic_menu_delete"
+            android:visibility="visible"
+            tools:visibility="visible" />
 
     </LinearLayout>
 
