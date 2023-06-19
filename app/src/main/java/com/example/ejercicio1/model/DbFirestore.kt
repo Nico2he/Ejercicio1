@@ -107,7 +107,7 @@ object DbFirestore {
             }
     }
 
-    fun modificaTitulo(comic: Comic?, titulo: String) {
+    fun editarComic(comic: Comic?, titulo: String, ) {
         FirebaseFirestore.getInstance().collection(COLLECTION_COMICS)
             .whereEqualTo("titulo", titulo)
             .get()
@@ -116,7 +116,9 @@ object DbFirestore {
                     val id = it.result.first().id
                     FirebaseFirestore.getInstance().collection(COLLECTION_COMICS)
                         .document(id)
-                        .update("titulo", comic?.titulo)
+                        .update("fechaEstreno", comic?.fechaEstreno,
+                            "capitulos", comic?.capitulos, "sinopsis", comic?.sinopsis,
+                            "valoracion", comic?.valoracion)
                         .addOnCompleteListener {
                             if (it.isSuccessful){
                                 Log.d(COLLECTION_COMICS, id)
