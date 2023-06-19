@@ -13,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.ejercicio1.R
 import com.example.ejercicio1.databinding.FragmentComicBinding
 import com.example.ejercicio1.ui.comicDetail.ComicDetailFragment
+import com.example.ejercicio1.ui.edit.EditComicFragment
 
 class ComicFragment : Fragment(R.layout.fragment_comic) {
 

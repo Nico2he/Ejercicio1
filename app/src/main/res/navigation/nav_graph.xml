@@ -19,6 +19,9 @@
         <action
             android:id="@+id/action_comicFragment_to_personajeFragment"
             app:destination="@id/personajeFragment" />
+        <action
+            android:id="@+id/action_comicFragment_to_editComicFragment"
+            app:destination="@id/editComicFragment" />
     </fragment>
     <fragment
         android:id="@+id/comicDetailFragment"
@@ -70,5 +73,14 @@
         <action
             android:id="@+id/action_createPersonajeFragment_to_personajeFragment"
             app:destination="@id/personajeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editComicFragment"
+        android:name="com.example.ejercicio1.ui.edit.EditComicFragment"
+        android:label="fragment_edit_comic"
+        tools:layout="@layout/fragment_edit_comic" >
+        <action
+            android:id="@+id/action_editComicFragment_to_comicFragment"
+            app:destination="@id/comicFragment" />
     </fragment>
 </navigation>
